@@ -1,19 +1,39 @@
 import { useState } from 'react'
 import { Mail, Send } from 'lucide-react'
+import { supabase } from '../lib/supabaseClient'
 
 export default function Contact() {
   const [form, setForm] = useState({ name: '', email: '', message: '' })
-  const [submitted, setSubmitted] = useState(false)
+  const [loading, setLoading] = useState(false)
 
   const handleChange = (e) => {
     const { name, value } = e.target
     setForm((prev) => ({ ...prev, [name]: value }))
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    setSubmitted(true)
-    setForm({ name: '', email: '', message: '' })
+    setLoading(true)
+
+    try {
+      const { error } = await supabase.from('contacts').insert([
+        {
+          name: form.name,
+          email: form.email,
+          message: form.message,
+        },
+      ])
+
+      if (error) throw error
+
+      alert('訊息已成功送出！')
+      setForm({ name: '', email: '', message: '' })
+    } catch (err) {
+      console.error(err)
+      alert(err?.message || '送出失敗，請稍後再試。')
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (
@@ -44,9 +64,10 @@ export default function Contact() {
               name="name"
               type="text"
               required
+              disabled={loading}
               value={form.name}
               onChange={handleChange}
-              className="w-full rounded-xl border border-stone-200 bg-stone-50 px-4 py-3 text-stone-900 outline-none transition-all duration-300 placeholder:text-stone-400 focus:border-teal-400 focus:bg-white focus:ring-2 focus:ring-teal-100"
+              className="w-full rounded-xl border border-stone-200 bg-stone-50 px-4 py-3 text-stone-900 outline-none transition-all duration-300 placeholder:text-stone-400 focus:border-teal-400 focus:bg-white focus:ring-2 focus:ring-teal-100 disabled:opacity-60"
               placeholder="您的名字"
             />
           </div>
@@ -60,9 +81,10 @@ export default function Contact() {
               name="email"
               type="email"
               required
+              disabled={loading}
               value={form.email}
               onChange={handleChange}
-              className="w-full rounded-xl border border-stone-200 bg-stone-50 px-4 py-3 text-stone-900 outline-none transition-all duration-300 placeholder:text-stone-400 focus:border-teal-400 focus:bg-white focus:ring-2 focus:ring-teal-100"
+              className="w-full rounded-xl border border-stone-200 bg-stone-50 px-4 py-3 text-stone-900 outline-none transition-all duration-300 placeholder:text-stone-400 focus:border-teal-400 focus:bg-white focus:ring-2 focus:ring-teal-100 disabled:opacity-60"
               placeholder="you@example.com"
             />
           </div>
@@ -76,26 +98,22 @@ export default function Contact() {
               name="message"
               required
               rows={5}
+              disabled={loading}
               value={form.message}
               onChange={handleChange}
-              className="w-full resize-none rounded-xl border border-stone-200 bg-stone-50 px-4 py-3 text-stone-900 outline-none transition-all duration-300 placeholder:text-stone-400 focus:border-teal-400 focus:bg-white focus:ring-2 focus:ring-teal-100"
+              className="w-full resize-none rounded-xl border border-stone-200 bg-stone-50 px-4 py-3 text-stone-900 outline-none transition-all duration-300 placeholder:text-stone-400 focus:border-teal-400 focus:bg-white focus:ring-2 focus:ring-teal-100 disabled:opacity-60"
               placeholder="想聊些什麼？"
             />
           </div>
 
           <button
             type="submit"
-            className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-teal-600 to-emerald-600 px-5 py-3 text-sm font-semibold text-white transition-all duration-300 hover:scale-[1.02] hover:shadow-lg hover:shadow-teal-200/60 sm:w-auto"
+            disabled={loading}
+            className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-teal-600 to-emerald-600 px-5 py-3 text-sm font-semibold text-white transition-all duration-300 hover:scale-[1.02] hover:shadow-lg hover:shadow-teal-200/60 disabled:cursor-not-allowed disabled:opacity-70 disabled:hover:scale-100 sm:w-auto"
           >
             <Send size={16} />
-            送出訊息
+            {loading ? '傳送中...' : '送出訊息'}
           </button>
-
-          {submitted && (
-            <p className="animate-fade-in text-sm text-emerald-700">
-              感謝你的訊息！（前端示意，尚未串接後端）
-            </p>
-          )}
         </form>
 
         <div className="flex flex-col justify-center gap-6">
@@ -107,11 +125,11 @@ export default function Contact() {
               偏好直接溝通？點擊下方按鈕開啟郵件客戶端。
             </p>
             <a
-              href="mailto:yungling.chu@example.com"
+              href="mailto:jodiechu1204@gmail.com"
               className="mt-6 inline-flex items-center gap-2 rounded-xl border border-teal-200 bg-teal-50 px-5 py-3 text-sm font-medium text-teal-700 transition-all duration-300 hover:-translate-y-0.5 hover:border-teal-300 hover:bg-teal-100 hover:shadow-md"
             >
               <Mail size={18} />
-              yungling.chu@example.com
+              jodiechu1204@gmail.com
             </a>
           </div>
         </div>
