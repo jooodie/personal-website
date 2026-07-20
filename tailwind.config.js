@@ -7,6 +7,9 @@ export default {
         sans: ['"DM Sans"', 'system-ui', 'sans-serif'],
         display: ['"Space Grotesk"', 'system-ui', 'sans-serif'],
       },
+      transitionProperty: {
+        height: 'height',
+      },
       animation: {
         'fade-in': 'fadeIn 0.7s ease-out forwards',
         'slide-up': 'slideUp 0.7s ease-out forwards',

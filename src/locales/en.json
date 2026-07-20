@@ -29,9 +29,9 @@
     "title": "Selected Projects",
     "description": "From competitive mindset to algorithm implementation—these are three areas I've been focused on recently.",
     "items": {
-      "smartRallyVision": {
-        "title": "Smart Rally Vision",
-        "description": "Computer vision analysis of badminton rally trajectories and tempo to support training planning and tactical review."
+      "badmintonDefenseAnalysis": {
+        "title": "AI-Driven Badminton Defense Analysis using Pose Estimation",
+        "description": "Combining MediaPipe pose estimation with a VICON segmental body-mass model to compute whole-body center-of-mass offset (CoM offset), and applying outlier filtering with temporal continuity to build an objective, interpretable badminton defensive gap detection system."
       },
       "algoMatchDashboard": {
         "title": "AlgoMatch Dashboard",

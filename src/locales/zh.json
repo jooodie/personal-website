@@ -29,9 +29,9 @@
     "title": "精選專案",
     "description": "從競技思維到演算法實作——以下是我近期專注的三個方向。",
     "items": {
-      "smartRallyVision": {
-        "title": "Smart Rally Vision",
-        "description": "以電腦視覺分析羽球對打軌跡與節奏，協助訓練規劃與戰術回顧。"
+      "badmintonDefenseAnalysis": {
+        "title": "AI-Driven Badminton Defense Analysis using Pose Estimation",
+        "description": "結合 MediaPipe 姿態估計與 VICON 身體分段質量模型，計算全身體重心理位移（CoM offset），並透過異常值過濾與時間連續性機制，建構客觀且具可解釋性的羽球防守空檔偵測系統。"
       },
       "algoMatchDashboard": {
         "title": "AlgoMatch Dashboard",

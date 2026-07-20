@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { Menu, X } from 'lucide-react'
 
@@ -10,9 +11,9 @@ export default function Navbar() {
   const isZh = i18n.language.startsWith('zh')
 
   const links = [
-    { href: '#about', label: t('nav.about') },
-    { href: '#projects', label: t('nav.projects') },
-    { href: '#contact', label: t('nav.contact') },
+    { href: '/#about', label: t('nav.about') },
+    { href: '/#projects', label: t('nav.projects') },
+    { href: '/#contact', label: t('nav.contact') },
   ]
 
   const toggleLanguage = () => {
@@ -42,23 +43,23 @@ export default function Navbar() {
       }`}
     >
       <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-        <a
-          href="#home"
+        <Link
+          to="/#home"
           className="font-display text-lg font-semibold tracking-tight text-stone-900 transition-colors duration-300 hover:text-teal-700"
         >
           YL<span className="text-gradient">.Chu</span>
-        </a>
+        </Link>
 
         <div className="hidden items-center gap-6 md:flex">
           <ul className="flex items-center gap-8">
             {links.map((link) => (
               <li key={link.href}>
-                <a
-                  href={link.href}
+                <Link
+                  to={link.href}
                   className="text-sm font-medium text-stone-600 transition-colors duration-300 hover:text-teal-700"
                 >
                   {link.label}
-                </a>
+                </Link>
               </li>
             ))}
           </ul>
@@ -121,13 +122,13 @@ export default function Navbar() {
         <ul className="flex flex-col gap-1 px-6 py-4">
           {links.map((link) => (
             <li key={link.href}>
-              <a
-                href={link.href}
+              <Link
+                to={link.href}
                 onClick={() => setOpen(false)}
                 className="block rounded-lg px-3 py-3 text-stone-700 transition-colors duration-300 hover:bg-stone-50 hover:text-teal-700"
               >
                 {link.label}
-              </a>
+              </Link>
             </li>
           ))}
         </ul>
