@@ -1,15 +1,19 @@
 import { Link } from 'react-router-dom'
-import { ArrowLeft } from 'lucide-react'
+import { ArrowLeft, ArrowUpRight } from 'lucide-react'
 import ChallengeFlipCards from '../components/ChallengeFlipCards'
+import TechnicalDesignSteps from '../components/TechnicalDesignSteps'
+import Latex from '../components/Latex'
 
 const sections = [
   { id: 'introduction', label: '1. Introduction' },
   { id: 'objective', label: '2. Project Objective' },
   { id: 'technical-design', label: '3. Technical Design' },
-  { id: 'contribution', label: '4. My Contribution' },
-  { id: 'challenges', label: '5. Challenges' },
-  { id: 'learned', label: '6. What I Learned' },
-  { id: 'conclusion', label: '7. Conclusion' },
+  { id: 'algorithm', label: '4. Algorithm' },
+  { id: 'behavioral-heatmap', label: '5. Behavioral Heatmap & Spatial Fusion' },
+  { id: 'contribution', label: '6. My Contribution' },
+  { id: 'challenges', label: '7. Challenges' },
+  { id: 'learned', label: '8. What I Learned' },
+  { id: 'conclusion', label: '9. Conclusion' },
 ]
 
 export default function ProjectReport() {
@@ -22,7 +26,7 @@ export default function ProjectReport() {
             className="inline-flex items-center gap-2 rounded-full border border-stone-200 bg-white px-4 py-2 text-sm font-medium text-stone-700 shadow-sm transition-all duration-300 hover:border-teal-300 hover:text-teal-800 hover:shadow-md"
           >
             <ArrowLeft size={16} />
-            <span>← 返回主頁 (Back to Home)</span>
+            <span>返回主頁 (Back to Home)</span>
           </Link>
           <p className="hidden text-xs font-medium uppercase tracking-[0.18em] text-stone-400 sm:block">
             Project Report
@@ -46,7 +50,7 @@ export default function ProjectReport() {
             </p>
             <p>
               <span className="font-medium text-stone-800">Date:</span>{' '}
-              January 2026
+              January 2026 · Defensive gap detection · CoM offset analysis
             </p>
           </div>
         </header>
@@ -142,58 +146,26 @@ export default function ProjectReport() {
 
           <section id="technical-design" className="scroll-mt-24">
             <SectionHeading number="03" title="Technical Design" />
-            <div className="mt-6 space-y-4 text-[1.05rem] leading-relaxed text-stone-700">
+            <div className="mt-6 space-y-4 text-[1.05rem] leading-relaxed text-slate-500">
               <p>
-              The technical stack centers on MediaPipe Pose for 3D world 
-              landmark extraction, followed by post-processing that cleans 
-              trajectories, estimates CoM using segmental weighting heuristics, 
-              and computes frame-wise distance features. To focus strictly on 
-              lateral and forward/backward court coverage, the 3D CoM is 
-              projected onto the horizontal ground plane (X-Z plane). 
-              A PyQt-based visualization layer presents time-series charts 
-              and overlays so analysts can inspect both the raw skeleton and 
-              derived metrics in the same review workflow.
-              </p>
-              <p>
-                At a high level, the pipeline proceeds as: video ingest → 3Dpose
-                estimation → landmark filtering / interpolation → horizontal plane projection & distance &amp;
-                CoM feature computation → interactive charting and export for
-                coaching notes.
+                The technical stack centers on MediaPipe Pose for 3D world
+                landmark extraction, followed by post-processing that cleans
+                trajectories, estimates CoM using segmental weighting heuristics,
+                and computes frame-wise distance features. To focus strictly on
+                lateral and forward/backward court coverage, the 3D CoM is
+                projected onto the horizontal ground plane (X-Z plane). A
+                PyQt-based visualization layer presents time-series charts and
+                overlays so analysts can inspect both the raw skeleton and
+                derived metrics in the same review workflow.
               </p>
             </div>
 
-            <figure className="mt-10 overflow-hidden rounded-2xl border border-stone-200 bg-white shadow-sm">
-              <img
-                src="/images/mediapipe-pose.png"
-                alt="MediaPipe Pose skeleton and body-segment weighting diagram"
-                className="w-full object-contain bg-stone-50"
-              />
-              <figcaption className="border-t border-stone-100 px-5 py-4 text-sm leading-relaxed text-stone-600">
-                <span className="font-medium text-stone-800">
-                  Figure 1.
-                </span>{' '}
-                MediaPipe human pose skeleton with segmental structure used as
-                the basis for landmark tracking and CoM weighting.
-                <span className="mt-2 block text-xs text-stone-500">
-                  Data source:{' '}
-                  <a
-                    href="https://developers.google.com/edge/mediapipe/solutions/vision/pose_landmarker#pose_landmarker_model"
-                    target="_blank"
-                    rel="noreferrer"
-                    className="font-medium text-teal-800 underline decoration-teal-800/30 underline-offset-2 transition-colors hover:text-teal-900"
-                  >
-                    MediaPipe Pose Landmarker — Google AI Edge
-                  </a>
-                </span>
-              </figcaption>
-            </figure>
-
             <div className="mt-8 grid gap-6 lg:grid-cols-2">
               <div className="rounded-2xl border border-stone-200 bg-white p-6 shadow-sm">
-                <h3 className="font-display text-lg font-semibold text-stone-900">
+                <h3 className="font-display text-lg font-semibold text-slate-800">
                   3D Pose Estimation Layer
                 </h3>
-                <ul className="mt-4 space-y-3 text-sm leading-relaxed text-stone-600">
+                <ul className="mt-4 space-y-3 text-sm leading-relaxed text-slate-500">
                   <li>
                     · MediaPipe Pose 3D landmarks provide a consistent skeletal graph (including depth estimation) 
                     across frames for stance and balance analysis.
@@ -207,12 +179,41 @@ export default function ProjectReport() {
                     lower-body readiness and recovery.
                   </li>
                 </ul>
+
+                <figure className="mt-5 overflow-hidden rounded-xl border border-stone-100 bg-stone-50">
+                  <div className="flex justify-center px-3 py-3">
+                    <img
+                      src="/images/mediapipe-pose.png"
+                      alt="MediaPipe Pose skeleton and body-segment weighting diagram"
+                      className="max-h-52 w-auto max-w-full object-contain"
+                    />
+                  </div>
+                  <figcaption className="border-t border-stone-100 bg-white px-3 py-2.5 text-[11px] leading-relaxed text-slate-500 sm:text-xs">
+                    <span className="font-medium text-slate-800">
+                      Figure 1.
+                    </span>{' '}
+                    MediaPipe human pose skeleton with segmental structure used as
+                    the basis for landmark tracking and CoM weighting.
+                    <span className="mt-1 block text-[10px] text-slate-400 sm:text-[11px]">
+                      Data source:{' '}
+                      <a
+                        href="https://developers.google.com/edge/mediapipe/solutions/vision/pose_landmarker#pose_landmarker_model"
+                        target="_blank"
+                        rel="noreferrer"
+                        className="font-medium text-teal-800 underline decoration-teal-800/30 underline-offset-2 transition-colors hover:text-teal-900"
+                      >
+                        MediaPipe Pose Landmarker — Google AI Edge
+                      </a>
+                    </span>
+                  </figcaption>
+                </figure>
               </div>
+
               <div className="rounded-2xl border border-stone-200 bg-white p-6 shadow-sm">
-                <h3 className="font-display text-lg font-semibold text-stone-900">
-                  Analytics &amp; UI layer
+                <h3 className="font-display text-lg font-semibold text-slate-800">
+                  Biomechanics Analytics & Validation
                 </h3>
-                <ul className="mt-4 space-y-3 text-sm leading-relaxed text-stone-600">
+                <ul className="mt-4 space-y-3 text-sm leading-relaxed text-slate-500">
                   <li>
                     · Distance metrics summarize stance geometry over rally
                     segments.
@@ -222,31 +223,139 @@ export default function ProjectReport() {
                     excessive lateral sway while ignoring vertical axis noise (e.g., jumping or squatting).
                   </li>
                   <li>
-                    · PyQt charts synchronize metric peaks with video context for
-                    coaching review.
+                    · Algorithm alignment cross-validates MediaPipe-derived trajectories against Vicon's gold-standard CoM calculation models.
                   </li>
                 </ul>
+
+                <figure className="mt-5 overflow-hidden rounded-xl border border-stone-100 bg-stone-50">
+                  <div className="flex justify-center px-3 py-3">
+                    <img
+                      src="/images/gold-standard.png"
+                      alt="Vicon segmental body-mass model table with CoM ratios and mass fractions"
+                      className="max-h-52 w-auto max-w-full object-contain"
+                    />
+                  </div>
+                  <figcaption className="border-t border-stone-100 bg-white px-3 py-2.5 text-[11px] leading-relaxed text-slate-500 sm:text-xs">
+                    <span className="font-medium text-slate-800">
+                      Figure 2.
+                    </span>{' '}
+                    Segmental CoM ratios and mass fractions adapted for
+                    whole-body CoM estimation and algorithm validation.
+                    <span className="mt-1 block text-[10px] text-slate-400 sm:text-[11px]">
+                      Data source:{' '}
+                      <a
+                        href="https://help.vicon.com/space/Nexus216/11607066/Kinetic+modeling"
+                        target="_blank"
+                        rel="noreferrer"
+                        className="font-medium text-teal-800 underline decoration-teal-800/30 underline-offset-2 transition-colors hover:text-teal-900"
+                      >
+                        Vicon Nexus — Kinetic modeling
+                      </a>
+                    </span>
+                  </figcaption>
+                </figure>
               </div>
             </div>
 
-            <figure className="mt-10 overflow-hidden rounded-2xl border border-stone-200 bg-white shadow-sm">
-              <img
-                src="/images/Badminton-Movement-Analysis-Tool.png"
-                alt="PyQt badminton analysis charts showing pose-derived metrics"
-                className="w-full object-contain bg-stone-50"
-              />
-              <figcaption className="border-t border-stone-100 px-5 py-4 text-sm leading-relaxed text-stone-600">
-                <span className="font-medium text-stone-800">
-                  Figure 2.
-                </span>{' '}
-                PyQt analysis charts used during review—linking pose-derived
-                distance and CoM signals to defensive phases within a rally.
-              </figcaption>
-            </figure>
+            <p className="mt-8 text-[1.05rem] leading-relaxed text-slate-500">
+              To synthesize these vision-derived metrics into actionable coaching
+              insights, the framework executes a deterministic 9-step pipeline
+              that standardizes, filters, and correlates physical tracking data
+              to map compound defensive gaps.
+            </p>
+          </section>
+
+          <section id="algorithm" className="scroll-mt-24">
+            <SectionHeading number="04" title="Algorithm" />
+            <TechnicalDesignSteps />
+
+            <div className="mt-6 flex justify-end">
+              <a
+                href="https://hackmd.io/@Jooo-notes/BJSnDk-BWe"
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-white px-3.5 py-2 text-xs font-medium text-slate-700 shadow-sm transition-all duration-300 hover:border-teal-300 hover:text-teal-800 hover:shadow-md"
+              >
+                Read Full Engineering Logs (ZH)
+                <ArrowUpRight size={14} />
+              </a>
+            </div>
+          </section>
+
+          <section id="behavioral-heatmap" className="scroll-mt-24">
+            <SectionHeading
+              number="05"
+              title="Behavioral Heatmap & Spatial Fusion"
+            />
+
+            <div className="mt-8">
+              <p className="text-[1.05rem] leading-relaxed tracking-wide text-slate-600">
+                To validate the joint mechanics of spatial reachability and body
+                balance, I engineered an interactive simulation dashboard using
+                PyQt and Matplotlib. This interface visualizes how a
+                player&apos;s current positioning and dynamic center of mass
+                (CoM) trajectory interact to produce a compound defensive risk
+                profile across a 25-cell court grid.
+              </p>
+
+              <ul className="mt-6 space-y-5 text-sm leading-relaxed tracking-wide text-slate-600 sm:text-[0.95rem]">
+                <li>
+                  <span className="font-semibold tracking-normal text-slate-800">
+                    Gap (Distance) Scores:
+                  </span>{' '}
+                  Computes the baseline spatial vulnerability based on Euclidean
+                  distance (
+                  <Latex tex="d = \sqrt{\Delta x^2 + \Delta z^2}" />) from the
+                  player&apos;s current coordinate (e.g., cell 13) to surrounding
+                  court quadrants.
+                </li>
+                <li>
+                  <span className="font-semibold tracking-normal text-slate-800">
+                    Center of Mass Offset:
+                  </span>{' '}
+                  Models directional instability. When a player&apos;s CoM shifts
+                  along a specific vector (e.g., <Latex tex="45^\circ" /> toward
+                  cell 9), a directional penalty is applied, simulating the high
+                  cognitive and physical cost of reversing momentum to cover
+                  opposite corners.
+                </li>
+                <li>
+                  <span className="font-semibold tracking-normal text-slate-800">
+                    Combined Analysis (Weighted Fusion):
+                  </span>{' '}
+                  Executes a customizable synthesis layer:{' '}
+                  <Latex
+                    display
+                    className="my-3 block overflow-x-auto rounded-xl border border-slate-200/80 bg-slate-50 px-4 py-3 text-slate-800"
+                    tex="\text{Combined Score} = (w_{gap} \times \text{Gap Score}) + (w_{com} \times \text{CoM Offset})"
+                  />
+                  This simulates prospective "Defensive Blindspots" under various scenario parameters, demonstrating how an unbalanced CoM creates severe tactical vulnerabilities even in nearby court cells.
+                </li>
+              </ul>
+
+              <figure className="mt-8">
+                <div className="overflow-hidden rounded-xl bg-white shadow-lg shadow-slate-300/40">
+                  <img
+                    src="/images/Badminton-Movement-Analysis-Tool.png"
+                    alt="PyQt simulation dashboard for defensive risk heatmap fusion"
+                    className="w-full object-contain"
+                  />
+                </div>
+                <figcaption className="mt-3 text-xs leading-relaxed tracking-wide text-slate-500 sm:text-sm">
+                  <span className="font-semibold text-slate-800">
+                    Figure 3.
+                  </span>{' '}
+                  PyQt simulation dashboard depicting the weighted fusion of
+                  geometric court reachability (left) and directional CoM
+                  displacement vectors (center) into a final compound defensive
+                  risk matrix (right).
+                </figcaption>
+              </figure>
+            </div>
           </section>
 
           <section id="contribution" className="scroll-mt-24">
-            <SectionHeading number="04" title="My Contribution" />
+            <SectionHeading number="06" title="My Contribution" />
             <div className="mt-6 space-y-4 text-[1.05rem] leading-relaxed text-stone-700">
               <p>
                 Leveraging my competitive badminton background, I spearheaded both the domain framing 
@@ -269,12 +378,12 @@ export default function ProjectReport() {
           </section>
 
           <section id="challenges" className="scroll-mt-24">
-            <SectionHeading number="05" title="Challenges" />
+            <SectionHeading number="07" title="Challenges" />
             <ChallengeFlipCards />
           </section>
 
           <section id="learned" className="scroll-mt-24">
-            <SectionHeading number="06" title="What I Learned" />
+            <SectionHeading number="08" title="What I Learned" />
             <div className="mt-6 space-y-4 text-[1.05rem] leading-relaxed text-stone-700">
               <p>
                 This project reinforced that sports analytics is not only about building accurate 
@@ -303,7 +412,7 @@ export default function ProjectReport() {
           </section>
 
           <section id="conclusion" className="scroll-mt-24">
-            <SectionHeading number="07" title="Conclusion" />
+            <SectionHeading number="09" title="Conclusion" />
             <div className="mt-6 rounded-2xl border border-stone-300 bg-white p-8 shadow-sm sm:p-10">
               <div className="space-y-4 text-[1.05rem] leading-relaxed text-stone-700">
                 <p>
@@ -330,7 +439,7 @@ export default function ProjectReport() {
             className="inline-flex items-center gap-2 rounded-full border border-stone-200 bg-white px-5 py-2.5 text-sm font-medium text-stone-700 shadow-sm transition-all duration-300 hover:border-teal-300 hover:text-teal-800 hover:shadow-md"
           >
             <ArrowLeft size={16} />
-            ← 返回主頁 (Back to Home)
+            返回主頁 (Back to Home)
           </Link>
         </div>
       </article>

@@ -38,44 +38,93 @@ const CHALLENGE_CARDS = [
       'Finding the engineering balance between stabilizing chaotic pose tracking and retaining authentic athletic micro-movements.',
     back: 'Pose estimation in explosive sports is inherently noisy, demanding aggressive smoothing filters to present readable charts for coaching review. However, over-smoothing risks erasing critical, high-frequency athletic data, such as micro-adjustments in footwork and split-step split seconds. Balancing these denoise settings required repeated empirical tuning to stabilize trajectories without smoothing out the true timing of player recovery.',
   },
+  {
+    id: 'weight-distance',
+    title: 'Ill-Defined Weights & Distance Scales',
+    summary:
+      'Balancing geometric Euclidean distance against biomechanical CoM displacement makes optimal weight ratios hard to define across different physical units.',
+    back: '**Cross-Domain Weight Optimization:** Balancing geometric Euclidean distance against biomechanical mass displacement introduces a significant calibration challenge. Because spatial proximity and dynamic balance operate in entirely different physical units, defining an optimal weight ratio (**w_gap** vs. **w_com**) relies heavily on empirical heuristics.\n\n**Individual Variance & Standardization:** A fixed parameter set fails to account for individual athletic capabilities. An elite player with exceptional reactivity can recover from a severe CoM offset that would be an absolute defensive blindspot for an amateur, making universal system tuning highly sensitive to subjective coaching alignment.',
+  },
 ]
 
 export default function ChallengeFlipCards() {
+  const [frontHeight, setFrontHeight] = useState(null)
+  const heightsRef = useRef({})
+
+  const reportFrontHeight = useCallback((id, height) => {
+    heightsRef.current[id] = height
+    const values = Object.values(heightsRef.current)
+    if (values.length === 0) return
+    const max = Math.max(...values)
+    setFrontHeight((prev) => (prev === max ? prev : max))
+  }, [])
+
   return (
     <div className="mt-6">
       <p className="w-full text-[1.05rem] leading-relaxed text-stone-700">
-      Deploying computer vision in elite sports transforms a standard video pipeline into a complex measurement and convergence challenge. The analytical workflow must successfully navigate a multi-layered technical hurdle: converting noisy monocular 3D tracking data into biomechanically valid signals. This required mitigating persistent limb occlusions and perspective geometry bias, balancing aggressive denoising filters against high-frequency footwork micro-movements, and ultimately contextualizing the metrics to account for individual core strength variations and dynamic tactical pressure.
+        Deploying computer vision in elite sports transforms a standard video
+        pipeline into a complex measurement and convergence challenge. The
+        analytical workflow must successfully navigate a multi-layered technical
+        hurdle: converting noisy monocular 3D tracking data into biomechanically
+        valid signals. This required mitigating persistent limb occlusions and
+        perspective geometry bias, balancing aggressive denoising filters against
+        high-frequency footwork micro-movements, and ultimately contextualizing
+        the metrics to account for individual core strength variations and
+        dynamic tactical pressure.
       </p>
 
-      <div className="mt-8 grid items-start gap-6 md:grid-cols-3">
+      <div className="mt-8 grid items-start gap-6 sm:grid-cols-2">
         {CHALLENGE_CARDS.map((card) => (
-          <FlipCard key={card.id} {...card} />
+          <FlipCard
+            key={card.id}
+            {...card}
+            uniformFrontHeight={frontHeight}
+            onFrontHeight={reportFrontHeight}
+          />
         ))}
       </div>
     </div>
   )
 }
 
-function FlipCard({ title, summary, back }) {
+function FlipCard({
+  id,
+  title,
+  summary,
+  back,
+  uniformFrontHeight,
+  onFrontHeight,
+}) {
   const [flipped, setFlipped] = useState(false)
-  const [height, setHeight] = useState('auto')
+  const [backHeight, setBackHeight] = useState(null)
   const frontRef = useRef(null)
   const backRef = useRef(null)
 
-  const updateHeight = useCallback(() => {
-    const active = flipped ? backRef.current : frontRef.current
-    if (!active) return
-    setHeight(active.scrollHeight)
-  }, [flipped])
+  const measure = useCallback(() => {
+    const front = frontRef.current
+    if (front) {
+      const previous = front.style.height
+      front.style.height = 'auto'
+      onFrontHeight(id, front.scrollHeight)
+      front.style.height = previous
+    }
+    if (backRef.current) {
+      setBackHeight(backRef.current.scrollHeight)
+    }
+  }, [id, onFrontHeight])
 
   useLayoutEffect(() => {
-    updateHeight()
-  }, [updateHeight, title, summary, back])
+    measure()
+  }, [measure, title, summary, back])
 
   useEffect(() => {
-    window.addEventListener('resize', updateHeight)
-    return () => window.removeEventListener('resize', updateHeight)
-  }, [updateHeight])
+    window.addEventListener('resize', measure)
+    return () => window.removeEventListener('resize', measure)
+  }, [measure])
+
+  const height = flipped
+    ? backHeight ?? 'auto'
+    : uniformFrontHeight ?? 'auto'
 
   return (
     <div
@@ -87,14 +136,18 @@ function FlipCard({ title, summary, back }) {
           type="button"
           aria-pressed={flipped}
           onClick={() => setFlipped((prev) => !prev)}
-          className={`preserve-3d relative w-full cursor-pointer rounded-2xl text-left outline-none transition-transform duration-500 ease-in-out focus-visible:ring-2 focus-visible:ring-teal-500/40 ${
+          className={`preserve-3d relative h-full w-full cursor-pointer rounded-2xl text-left outline-none transition-transform duration-500 ease-in-out focus-visible:ring-2 focus-visible:ring-teal-500/40 ${
             flipped ? 'rotate-y-180' : ''
           }`}
-          style={{ height }}
         >
           <div
             ref={frontRef}
-            className="backface-hidden absolute inset-x-0 top-0 rounded-2xl border border-slate-900/[0.08] bg-white p-5 shadow-[0_10px_30px_-5px_rgba(0,0,0,0.03),0_0_30px_rgba(51,65,85,0.08)] transition-all duration-300"
+            className="backface-hidden absolute inset-x-0 top-0 flex min-h-full w-full flex-col rounded-2xl border border-slate-900/[0.08] bg-white p-5 shadow-[0_10px_30px_-5px_rgba(0,0,0,0.03),0_0_30px_rgba(51,65,85,0.08)] transition-all duration-300"
+            style={
+              !flipped && uniformFrontHeight
+                ? { height: uniformFrontHeight }
+                : undefined
+            }
           >
             <div className="mb-3 flex items-center justify-between gap-2">
               <span className="text-[10px] font-semibold uppercase tracking-[0.18em] text-teal-800">
@@ -105,7 +158,9 @@ function FlipCard({ title, summary, back }) {
             <h3 className="font-display text-base font-semibold leading-snug text-stone-900">
               {title}
             </h3>
-            <p className="mt-3 text-sm leading-relaxed text-stone-600">{summary}</p>
+            <p className="mt-3 flex-1 text-sm leading-relaxed text-stone-600">
+              {summary}
+            </p>
           </div>
 
           <div
@@ -122,7 +177,7 @@ function FlipCard({ title, summary, back }) {
               {title}
             </h3>
             {back ? (
-              <p className="mt-3 text-sm leading-relaxed text-stone-600">
+              <p className="mt-3 whitespace-pre-line text-sm leading-relaxed text-stone-600">
                 {renderWithBold(back)}
               </p>
             ) : (
