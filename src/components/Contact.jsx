@@ -1,8 +1,10 @@
 import { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Mail, Send } from 'lucide-react'
 import { supabase } from '../lib/supabaseClient'
 
 export default function Contact() {
+  const { t } = useTranslation()
   const [form, setForm] = useState({ name: '', email: '', message: '' })
   const [loading, setLoading] = useState(false)
 
@@ -26,11 +28,11 @@ export default function Contact() {
 
       if (error) throw error
 
-      alert('訊息已成功送出！')
+      alert(t('contact.success'))
       setForm({ name: '', email: '', message: '' })
     } catch (err) {
       console.error(err)
-      alert(err?.message || '送出失敗，請稍後再試。')
+      alert(err?.message || t('contact.error'))
     } finally {
       setLoading(false)
     }
@@ -40,13 +42,13 @@ export default function Contact() {
     <section id="contact" className="mx-auto max-w-6xl px-6 py-24">
       <div className="mb-12">
         <p className="text-sm font-medium uppercase tracking-[0.2em] text-teal-700">
-          Contact
+          {t('contact.label')}
         </p>
         <h2 className="mt-3 font-display text-3xl font-bold text-stone-900 sm:text-4xl">
-          聯絡我
+          {t('contact.title')}
         </h2>
         <p className="mt-4 max-w-2xl text-stone-600">
-          有合作、職缺或想聊聊 AI 與運動科學？歡迎直接來信或填寫表單。
+          {t('contact.description')}
         </p>
       </div>
 
@@ -57,7 +59,7 @@ export default function Contact() {
         >
           <div>
             <label htmlFor="name" className="mb-2 block text-sm text-stone-700">
-              姓名
+              {t('contact.name')}
             </label>
             <input
               id="name"
@@ -68,13 +70,13 @@ export default function Contact() {
               value={form.name}
               onChange={handleChange}
               className="w-full rounded-xl border border-stone-200 bg-stone-50 px-4 py-3 text-stone-900 outline-none transition-all duration-300 placeholder:text-stone-400 focus:border-teal-400 focus:bg-white focus:ring-2 focus:ring-teal-100 disabled:opacity-60"
-              placeholder="您的名字"
+              placeholder={t('contact.namePlaceholder')}
             />
           </div>
 
           <div>
             <label htmlFor="email" className="mb-2 block text-sm text-stone-700">
-              Email
+              {t('contact.email')}
             </label>
             <input
               id="email"
@@ -85,13 +87,13 @@ export default function Contact() {
               value={form.email}
               onChange={handleChange}
               className="w-full rounded-xl border border-stone-200 bg-stone-50 px-4 py-3 text-stone-900 outline-none transition-all duration-300 placeholder:text-stone-400 focus:border-teal-400 focus:bg-white focus:ring-2 focus:ring-teal-100 disabled:opacity-60"
-              placeholder="you@example.com"
+              placeholder={t('contact.emailPlaceholder')}
             />
           </div>
 
           <div>
             <label htmlFor="message" className="mb-2 block text-sm text-stone-700">
-              訊息
+              {t('contact.message')}
             </label>
             <textarea
               id="message"
@@ -102,7 +104,7 @@ export default function Contact() {
               value={form.message}
               onChange={handleChange}
               className="w-full resize-none rounded-xl border border-stone-200 bg-stone-50 px-4 py-3 text-stone-900 outline-none transition-all duration-300 placeholder:text-stone-400 focus:border-teal-400 focus:bg-white focus:ring-2 focus:ring-teal-100 disabled:opacity-60"
-              placeholder="想聊些什麼？"
+              placeholder={t('contact.messagePlaceholder')}
             />
           </div>
 
@@ -112,17 +114,17 @@ export default function Contact() {
             className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-teal-600 to-emerald-600 px-5 py-3 text-sm font-semibold text-white transition-all duration-300 hover:scale-[1.02] hover:shadow-lg hover:shadow-teal-200/60 disabled:cursor-not-allowed disabled:opacity-70 disabled:hover:scale-100 sm:w-auto"
           >
             <Send size={16} />
-            {loading ? '傳送中...' : '送出訊息'}
+            {loading ? t('contact.sending') : t('contact.submit')}
           </button>
         </form>
 
         <div className="flex flex-col justify-center gap-6">
           <div className="rounded-2xl border border-stone-200 bg-white p-6 shadow-sm">
             <h3 className="font-display text-lg font-semibold text-stone-900">
-              直接 Email 聯絡
+              {t('contact.directEmailTitle')}
             </h3>
             <p className="mt-2 text-sm text-stone-600">
-              偏好直接溝通？點擊下方按鈕開啟郵件客戶端。
+              {t('contact.directEmailDesc')}
             </p>
             <a
               href="mailto:jodiechu1204@gmail.com"

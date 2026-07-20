@@ -1,0 +1,73 @@
+{
+  "nav": {
+    "about": "關於我",
+    "projects": "專案",
+    "contact": "聯絡我",
+    "openMenu": "開啟選單",
+    "closeMenu": "關閉選單",
+    "switchToEn": "切換至英文",
+    "switchToZh": "切換至中文"
+  },
+  "hero": {
+    "label": "Digital Portfolio",
+    "nameChinese": "朱詠翎",
+    "role": "AI 演算法工程師 · 前競技運動員",
+    "tagline": "帶著運動員的強韌心態，在程式碼與演算法的世界裡全力揮拍。",
+    "scrollDown": "向下探索"
+  },
+  "about": {
+    "label": "About Me",
+    "title": "關於我",
+    "p1": "我是朱詠翎，一位從競技羽球選手轉型為 AI 演算法工程師的開發者。球場上無數次對決與復原的歷程，鍛鍊出超強抗壓性，以及面對難題絕不妥協的執著。",
+    "p2": "退役後，我把同樣的節奏感與紀律帶進程式與演算法的世界——從模型訓練、系統部署到前端呈現，我習慣先釐清問題本質，再以可驗證的方式一步步推進。",
+    "p3": "對我來說，寫程式就像比賽：每一次迭代都是一拍，目標是在壓力下仍能穩定出手、持續進步。",
+    "techWall": "技術標籤牆",
+    "quote": "「比賽教會我：結果來自每一次專注的練習。寫 code 也是一樣——把複雜問題拆解，然後一拍一拍打回去。」"
+  },
+  "projects": {
+    "label": "Selected Projects",
+    "title": "精選專案",
+    "description": "從競技思維到演算法實作——以下是我近期專注的三個方向。",
+    "items": {
+      "smartRallyVision": {
+        "title": "Smart Rally Vision",
+        "description": "以電腦視覺分析羽球對打軌跡與節奏，協助訓練規劃與戰術回顧。"
+      },
+      "algoMatchDashboard": {
+        "title": "AlgoMatch Dashboard",
+        "description": "即時監控模型訓練指標與資源使用，打造工程師友善的觀測介面。"
+      },
+      "pressuredDecisionLab": {
+        "title": "Pressured Decision Lab",
+        "description": "模擬高壓決策場景的輕量實驗平台，探索抗壓策略對表現的影響。"
+      }
+    }
+  },
+  "contact": {
+    "label": "Contact",
+    "title": "聯絡我",
+    "description": "有合作、職缺或想聊聊 AI 與運動科學？歡迎直接來信或填寫表單。",
+    "name": "姓名",
+    "email": "Email",
+    "message": "訊息",
+    "namePlaceholder": "您的名字",
+    "emailPlaceholder": "you@example.com",
+    "messagePlaceholder": "想聊些什麼？",
+    "submit": "送出訊息",
+    "sending": "傳送中...",
+    "success": "訊息已成功送出！",
+    "error": "送出失敗，請稍後再試。",
+    "directEmailTitle": "直接 Email 聯絡",
+    "directEmailDesc": "偏好直接溝通？點擊下方按鈕開啟郵件客戶端。"
+  },
+  "carousel": {
+    "photoAlt": "個人照片 {{number}}",
+    "prevPhoto": "上一張照片",
+    "nextPhoto": "下一張照片",
+    "goToPhoto": "切換至第 {{number}} 張照片"
+  },
+  "footer": {
+    "copyright": "© {{year}} Yung-Ling Chu · 朱詠翎",
+    "builtWith": "Built with React & Tailwind CSS"
+  }
+}

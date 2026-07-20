@@ -1,15 +1,23 @@
 import { useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Menu, X } from 'lucide-react'
 
-const links = [
-  { href: '#about', label: '關於我' },
-  { href: '#projects', label: '專案' },
-  { href: '#contact', label: '聯絡我' },
-]
-
 export default function Navbar() {
+  const { t, i18n } = useTranslation()
   const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+
+  const isZh = i18n.language.startsWith('zh')
+
+  const links = [
+    { href: '#about', label: t('nav.about') },
+    { href: '#projects', label: t('nav.projects') },
+    { href: '#contact', label: t('nav.contact') },
+  ]
+
+  const toggleLanguage = () => {
+    i18n.changeLanguage(isZh ? 'en' : 'zh')
+  }
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12)
@@ -41,28 +49,66 @@ export default function Navbar() {
           YL<span className="text-gradient">.Chu</span>
         </a>
 
-        <ul className="hidden items-center gap-8 md:flex">
-          {links.map((link) => (
-            <li key={link.href}>
-              <a
-                href={link.href}
-                className="text-sm font-medium text-stone-600 transition-colors duration-300 hover:text-teal-700"
-              >
-                {link.label}
-              </a>
-            </li>
-          ))}
-        </ul>
+        <div className="hidden items-center gap-6 md:flex">
+          <ul className="flex items-center gap-8">
+            {links.map((link) => (
+              <li key={link.href}>
+                <a
+                  href={link.href}
+                  className="text-sm font-medium text-stone-600 transition-colors duration-300 hover:text-teal-700"
+                >
+                  {link.label}
+                </a>
+              </li>
+            ))}
+          </ul>
 
-        <button
-          type="button"
-          aria-label={open ? '關閉選單' : '開啟選單'}
-          aria-expanded={open}
-          className="rounded-lg border border-stone-200 p-2 text-stone-700 transition-colors duration-300 hover:border-teal-300 hover:text-teal-700 md:hidden"
-          onClick={() => setOpen((v) => !v)}
-        >
-          {open ? <X size={20} /> : <Menu size={20} />}
-        </button>
+          <button
+            type="button"
+            onClick={toggleLanguage}
+            aria-label={isZh ? t('nav.switchToEn') : t('nav.switchToZh')}
+            className="inline-flex items-center gap-1 rounded-full border border-stone-200 bg-white/80 px-3 py-1.5 text-xs font-medium shadow-sm transition-all duration-300 hover:border-teal-300 hover:shadow-md"
+          >
+            <span
+              className={`transition-colors duration-300 ${
+                !isZh ? 'text-teal-700' : 'text-stone-400'
+              }`}
+            >
+              EN
+            </span>
+            <span className="text-stone-300">/</span>
+            <span
+              className={`transition-colors duration-300 ${
+                isZh ? 'text-teal-700' : 'text-stone-400'
+              }`}
+            >
+              中文
+            </span>
+          </button>
+        </div>
+
+        <div className="flex items-center gap-3 md:hidden">
+          <button
+            type="button"
+            onClick={toggleLanguage}
+            aria-label={isZh ? t('nav.switchToEn') : t('nav.switchToZh')}
+            className="inline-flex items-center gap-1 rounded-full border border-stone-200 bg-white/80 px-2.5 py-1 text-xs font-medium shadow-sm transition-all duration-300 hover:border-teal-300"
+          >
+            <span className={!isZh ? 'text-teal-700' : 'text-stone-400'}>EN</span>
+            <span className="text-stone-300">/</span>
+            <span className={isZh ? 'text-teal-700' : 'text-stone-400'}>中文</span>
+          </button>
+
+          <button
+            type="button"
+            aria-label={open ? t('nav.closeMenu') : t('nav.openMenu')}
+            aria-expanded={open}
+            className="rounded-lg border border-stone-200 p-2 text-stone-700 transition-colors duration-300 hover:border-teal-300 hover:text-teal-700"
+            onClick={() => setOpen((v) => !v)}
+          >
+            {open ? <X size={20} /> : <Menu size={20} />}
+          </button>
+        </div>
       </nav>
 
       <div

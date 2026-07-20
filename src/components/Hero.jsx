@@ -1,6 +1,9 @@
+import { useTranslation } from 'react-i18next'
 import ImageCarousel from './ImageCarousel'
 
 export default function Hero() {
+  const { t } = useTranslation()
+
   return (
     <section
       id="home"
@@ -9,20 +12,20 @@ export default function Hero() {
       <div className="grid animate-slide-up items-center gap-12 lg:grid-cols-[1.1fr_auto] lg:gap-16">
         <div className="max-w-2xl">
           <p className="mb-4 text-sm font-medium uppercase tracking-[0.2em] text-teal-700">
-            Digital Portfolio
+            {t('hero.label')}
           </p>
 
           <h1 className="font-display text-4xl font-bold leading-tight tracking-tight text-stone-900 sm:text-5xl lg:text-6xl">
             Yung-Ling Chu
-            <span className="mt-2 block text-gradient">朱詠翎</span>
+            <span className="mt-2 block text-gradient">{t('hero.nameChinese')}</span>
           </h1>
 
           <p className="mt-5 text-lg font-medium text-slate-700 sm:text-xl">
-            AI Algorithm Engineer &amp; Former Athlete
+            {t('hero.role')}
           </p>
 
           <p className="mt-6 max-w-2xl text-base leading-relaxed text-stone-600 sm:text-lg">
-            帶著運動員的強韌心態，在程式碼與演算法的世界裡全力揮拍。
+            {t('hero.tagline')}
           </p>
 
           <div className="mt-12">
@@ -30,7 +33,7 @@ export default function Hero() {
               href="#about"
               className="inline-flex items-center gap-2 text-sm text-stone-500 transition-colors duration-300 hover:text-teal-700"
             >
-              向下探索
+              {t('hero.scrollDown')}
               <span className="inline-block animate-bounce">↓</span>
             </a>
           </div>

@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { Github, Linkedin, Mail } from 'lucide-react'
 
 const socials = [
@@ -13,12 +14,14 @@ const socials = [
   },
   {
     label: 'Gmail',
-    href: 'mailto:yungling.chu@example.com',
+    href: 'mailto:jodiechu1204@gmail.com',
     icon: Mail,
   },
 ]
 
 export default function Footer() {
+  const { t } = useTranslation()
+
   return (
     <footer className="border-t border-stone-200 bg-white px-6 py-10">
       <div className="mx-auto flex max-w-6xl flex-col items-center gap-8">
@@ -39,8 +42,8 @@ export default function Footer() {
         </div>
 
         <div className="flex flex-col items-center justify-between gap-3 text-sm text-stone-500 sm:flex-row sm:gap-6">
-          <p>© {new Date().getFullYear()} Yung-Ling Chu · 朱詠翎</p>
-          <p className="text-stone-400">Built with React &amp; Tailwind CSS</p>
+          <p>{t('footer.copyright', { year: new Date().getFullYear() })}</p>
+          <p className="text-stone-400">{t('footer.builtWith')}</p>
         </div>
       </div>
     </footer>

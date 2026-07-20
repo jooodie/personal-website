@@ -1,0 +1,73 @@
+{
+  "nav": {
+    "about": "About",
+    "projects": "Projects",
+    "contact": "Contact",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "switchToEn": "Switch to English",
+    "switchToZh": "Switch to Chinese"
+  },
+  "hero": {
+    "label": "Digital Portfolio",
+    "nameChinese": "朱詠翎",
+    "role": "AI Algorithm Engineer · Former Competitive Athlete",
+    "tagline": "Bringing an athlete's resilience to the world of code and algorithms—swinging with full commitment.",
+    "scrollDown": "Explore below"
+  },
+  "about": {
+    "label": "About Me",
+    "title": "About Me",
+    "p1": "I'm Yung-Ling Chu, a developer who transitioned from competitive badminton to AI algorithm engineering. Countless matches and recovery cycles on court built exceptional mental toughness and an uncompromising drive to tackle hard problems.",
+    "p2": "After retiring from competition, I brought the same sense of rhythm and discipline into programming and algorithms—from model training and system deployment to front-end delivery, I start by clarifying the problem, then advance step by step in verifiable increments.",
+    "p3": "To me, coding is like competition: every iteration is a rally, with the goal of executing consistently under pressure and continuously improving.",
+    "techWall": "Tech Stack",
+    "quote": "\"Competition taught me that results come from focused practice in every rep. Writing code is no different—break complex problems down, then rally back one shot at a time.\""
+  },
+  "projects": {
+    "label": "Selected Projects",
+    "title": "Selected Projects",
+    "description": "From competitive mindset to algorithm implementation—these are three areas I've been focused on recently.",
+    "items": {
+      "smartRallyVision": {
+        "title": "Smart Rally Vision",
+        "description": "Computer vision analysis of badminton rally trajectories and tempo to support training planning and tactical review."
+      },
+      "algoMatchDashboard": {
+        "title": "AlgoMatch Dashboard",
+        "description": "Real-time monitoring of model training metrics and resource utilization in an engineer-friendly observability interface."
+      },
+      "pressuredDecisionLab": {
+        "title": "Pressured Decision Lab",
+        "description": "A lightweight experimental platform simulating high-pressure decision scenarios to explore how resilience strategies affect performance."
+      }
+    }
+  },
+  "contact": {
+    "label": "Contact",
+    "title": "Contact Me",
+    "description": "Interested in collaboration, job opportunities, or discussing AI and sports science? Feel free to email me or fill out the form.",
+    "name": "Name",
+    "email": "Email",
+    "message": "Message",
+    "namePlaceholder": "Your name",
+    "emailPlaceholder": "you@example.com",
+    "messagePlaceholder": "What's on your mind?",
+    "submit": "Send Message",
+    "sending": "Sending...",
+    "success": "Message sent successfully!",
+    "error": "Failed to send. Please try again later.",
+    "directEmailTitle": "Email Me Directly",
+    "directEmailDesc": "Prefer direct communication? Click below to open your email client."
+  },
+  "carousel": {
+    "photoAlt": "Personal photo {{number}}",
+    "prevPhoto": "Previous photo",
+    "nextPhoto": "Next photo",
+    "goToPhoto": "Go to photo {{number}}"
+  },
+  "footer": {
+    "copyright": "© {{year}} Yung-Ling Chu · 朱詠翎",
+    "builtWith": "Built with React & Tailwind CSS"
+  }
+}
