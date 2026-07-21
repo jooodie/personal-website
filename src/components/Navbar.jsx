@@ -68,7 +68,7 @@ export default function Navbar() {
             type="button"
             onClick={toggleLanguage}
             aria-label={isZh ? t('nav.switchToEn') : t('nav.switchToZh')}
-            className="inline-flex items-center gap-1 rounded-full border border-stone-200 bg-white/80 px-3 py-1.5 text-xs font-medium shadow-sm transition-all duration-300 hover:border-teal-300 hover:shadow-md"
+            className="soft-btn gap-1 px-3 py-1.5 text-xs"
           >
             <span
               className={`transition-colors duration-300 ${
@@ -93,7 +93,7 @@ export default function Navbar() {
             type="button"
             onClick={toggleLanguage}
             aria-label={isZh ? t('nav.switchToEn') : t('nav.switchToZh')}
-            className="inline-flex items-center gap-1 rounded-full border border-stone-200 bg-white/80 px-2.5 py-1 text-xs font-medium shadow-sm transition-all duration-300 hover:border-teal-300"
+            className="soft-btn gap-1 px-2.5 py-1 text-xs"
           >
             <span className={!isZh ? 'text-teal-700' : 'text-stone-400'}>EN</span>
             <span className="text-stone-300">/</span>
@@ -104,7 +104,7 @@ export default function Navbar() {
             type="button"
             aria-label={open ? t('nav.closeMenu') : t('nav.openMenu')}
             aria-expanded={open}
-            className="rounded-lg border border-stone-200 p-2 text-stone-700 transition-colors duration-300 hover:border-teal-300 hover:text-teal-700"
+            className="soft-btn rounded-lg p-2 text-slate-700"
             onClick={() => setOpen((v) => !v)}
           >
             {open ? <X size={20} /> : <Menu size={20} />}

@@ -21,10 +21,8 @@ export default function ProjectReport() {
     <div className="min-h-screen bg-[#f7f5f1] text-stone-800">
       <div className="border-b border-stone-200/80 bg-white/90 backdrop-blur-md">
         <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
-          <Link
-            to="/"
-            className="inline-flex items-center gap-2 rounded-full border border-stone-200 bg-white px-4 py-2 text-sm font-medium text-stone-700 shadow-sm transition-all duration-300 hover:border-teal-300 hover:text-teal-800 hover:shadow-md"
-          >
+          <Link to="/" className="soft-btn px-4 py-2 text-sm">
+
             <ArrowLeft size={16} />
             <span>返回主頁 (Back to Home)</span>
           </Link>
@@ -50,14 +48,14 @@ export default function ProjectReport() {
             </p>
             <p>
               <span className="font-medium text-stone-800">Date:</span>{' '}
-              January 2026 · Defensive gap detection · CoM offset analysis
+              February 2026 · Defensive gap detection · CoM offset analysis
             </p>
           </div>
         </header>
 
         <nav
           aria-label="Report sections"
-          className="mb-14 rounded-2xl border border-stone-200 bg-white p-6 shadow-sm"
+          className="soft-card mb-14 p-6"
         >
           <p className="mb-4 text-xs font-semibold uppercase tracking-[0.18em] text-stone-500">
             Table of Contents
@@ -101,7 +99,7 @@ export default function ProjectReport() {
                   characterize defensive readiness and recovery patterns.
                 </p>
               </div>
-              <aside className="rounded-2xl border border-teal-100 bg-teal-50/50 p-6">
+              <aside className="soft-card p-6">
                 <p className="text-xs font-semibold uppercase tracking-[0.16em] text-teal-800">
                   Research Focus
                 </p>
@@ -161,7 +159,7 @@ export default function ProjectReport() {
             </div>
 
             <div className="mt-8 grid gap-6 lg:grid-cols-2">
-              <div className="rounded-2xl border border-stone-200 bg-white p-6 shadow-sm">
+              <div className="soft-card p-6">
                 <h3 className="font-display text-lg font-semibold text-slate-800">
                   3D Pose Estimation Layer
                 </h3>
@@ -209,7 +207,7 @@ export default function ProjectReport() {
                 </figure>
               </div>
 
-              <div className="rounded-2xl border border-stone-200 bg-white p-6 shadow-sm">
+              <div className="soft-card p-6">
                 <h3 className="font-display text-lg font-semibold text-slate-800">
                   Biomechanics Analytics & Validation
                 </h3>
@@ -274,7 +272,7 @@ export default function ProjectReport() {
                 href="https://hackmd.io/@Jooo-notes/BJSnDk-BWe"
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-white px-3.5 py-2 text-xs font-medium text-slate-700 shadow-sm transition-all duration-300 hover:border-teal-300 hover:text-teal-800 hover:shadow-md"
+                className="soft-btn px-3.5 py-2 text-xs"
               >
                 Read Full Engineering Logs (ZH)
                 <ArrowUpRight size={14} />
@@ -334,7 +332,7 @@ export default function ProjectReport() {
               </ul>
 
               <figure className="mt-8">
-                <div className="overflow-hidden rounded-xl bg-white shadow-lg shadow-slate-300/40">
+                <div className="soft-card overflow-hidden">
                   <img
                     src="/images/Badminton-Movement-Analysis-Tool.png"
                     alt="PyQt simulation dashboard for defensive risk heatmap fusion"
@@ -413,7 +411,7 @@ export default function ProjectReport() {
 
           <section id="conclusion" className="scroll-mt-24">
             <SectionHeading number="09" title="Conclusion" />
-            <div className="mt-6 rounded-2xl border border-stone-300 bg-white p-8 shadow-sm sm:p-10">
+            <div className="soft-card mt-6 p-8 sm:p-10">
               <div className="space-y-4 text-[1.05rem] leading-relaxed text-stone-700">
                 <p>
                   This project demonstrates a practical path from 3D pose estimation to defense-oriented 
@@ -434,10 +432,8 @@ export default function ProjectReport() {
         </div>
 
         <div className="mt-16 flex justify-center border-t border-stone-300 pt-10">
-          <Link
-            to="/"
-            className="inline-flex items-center gap-2 rounded-full border border-stone-200 bg-white px-5 py-2.5 text-sm font-medium text-stone-700 shadow-sm transition-all duration-300 hover:border-teal-300 hover:text-teal-800 hover:shadow-md"
-          >
+          <Link to="/" className="soft-btn px-5 py-2.5 text-sm">
+
             <ArrowLeft size={16} />
             返回主頁 (Back to Home)
           </Link>
@@ -462,7 +458,7 @@ function SectionHeading({ number, title }) {
 
 function ObjectiveCard({ title, body }) {
   return (
-    <div className="rounded-2xl border border-stone-200 bg-white p-6 shadow-sm">
+    <div className="soft-card p-6">
       <h3 className="font-display text-lg font-semibold text-stone-900">{title}</h3>
       <p className="mt-3 text-sm leading-relaxed text-stone-600">{body}</p>
     </div>

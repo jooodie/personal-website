@@ -22,7 +22,80 @@
     "p2": "After retiring from competition, I brought the same sense of rhythm and discipline into programming and algorithms—from model training and system deployment to front-end delivery, I start by clarifying the problem, then advance step by step in verifiable increments.",
     "p3": "To me, coding is like competition: every iteration is a rally, with the goal of executing consistently under pressure and continuously improving.",
     "techWall": "Tech Stack",
-    "quote": "\"Competition taught me that results come from focused practice in every rep. Writing code is no different—break complex problems down, then rally back one shot at a time.\""
+    "quote": "\"Competition taught me that results come from focused practice in every rep. Writing code is no different—break complex problems down, then rally back one shot at a time.\"",
+    "viewFullBio": "View Full Bio"
+  },
+  "aboutBio": {
+    "backHome": "Back to Home",
+    "pageLabel": "Resume",
+    "photoAlt": "Portrait of Yung-Ling Chu",
+    "name": "朱詠翎",
+    "meta": "Age 24 | 2001.12.04",
+    "contact": {
+      "phone": "0972-945-675 / \n(03)456-5299",
+      "phoneTel": "0972945675",
+      "email": "jodiechu1204@gmail.com",
+      "licenseLabel": "Driver's License",
+      "license": "Ordinary heavy motorcycle, Ordinary light vehicle"
+    },
+    "careerLabel": "Target Roles / Career Focus",
+    "careerTargets": [
+      "FAE Engineer",
+      "Business Development (BD)",
+      "Associate Product Manager (APM)",
+      "Technical Sales"
+    ],
+    "skillsLabel": "Core Competencies",
+    "skills": [
+      "CS background & technical fluency",
+      "Customer needs analysis & communication",
+      "English presentation & business communication",
+      "Cross-team collaboration & project drive",
+      "Partnership development & initiative execution",
+      "Product application scenario analysis"
+    ],
+    "traitsLabel": "Personal Traits",
+    "traits": [
+      "#Technical background × business communication",
+      "#Cross-domain adaptability & fast learning",
+      "#Proactive execution & problem solving"
+    ],
+    "educationTitle": "Education / Background",
+    "education": [
+      {
+        "school": "Tamkang University — CSIE (English Program)",
+        "detail": "Department of Computer Science and Information Engineering",
+        "period": "2020 – 2025"
+      },
+      {
+        "school": "University of Warsaw",
+        "detail": "One-year exchange student",
+        "period": "2024 – 2025"
+      }
+    ],
+    "experienceTitle": "Work Experience & Project Outcomes",
+    "experienceSummary": "Contributed to computer-vision and AI projects covering image recognition, system testing, on-site application observation, and technical feedback. Later transferred internally to Business Development after growing interest in product applications, customer needs, and business models—helping organize market and partner requirements, plan product/service offerings, and translate client feedback into actionable directions for internal teams.",
+    "roles": {
+      "ai": {
+        "title": "AI Algorithm Engineer",
+        "items": [
+          "Worked on computer-vision projects including image-based detection, pose estimation, system testing, and real-world application validation.",
+          "Applied CS and AI knowledge to understand technical logic, analyze field scenarios, and identify practical issues during system deployment.",
+          "Organized technical issues and user feedback to support model/system improvement and strengthen real-world applicability."
+        ]
+      },
+      "bd": {
+        "title": "Business Development",
+        "items": [
+          "Ideated and advanced a new sports-tech application initiative, contributing to concept planning, partnership-model design, and execution direction.",
+          "Collaborated with engineering, UI/UX, and digital media teams to align technical feasibility, user experience, and visual presentation needs.",
+          "Visited 10+ sports venues and school partners, building cooperation interest and opening potential channels for follow-on projects.",
+          "Supported school-oriented project development including proposal preparation, communication follow-ups, requirement clarification, and internal task coordination.",
+          "Helped plan tech-enabled winter/summer camp programs, shaping learning activities, student experience flows, and project deliverables.",
+          "Joined semester-based PBL programs with partner schools, assisting curriculum planning, project timeline management, and coordination between school needs and internal execution."
+        ]
+      }
+    }
   },
   "projects": {
     "label": "Selected Projects",

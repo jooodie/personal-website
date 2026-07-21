@@ -47,16 +47,29 @@ const CHALLENGE_CARDS = [
   },
 ]
 
+const cardShellClass = 'soft-card-static p-5'
+
 export default function ChallengeFlipCards() {
   const [frontHeight, setFrontHeight] = useState(null)
+  const [flippedIds, setFlippedIds] = useState(() => new Set())
   const heightsRef = useRef({})
 
   const reportFrontHeight = useCallback((id, height) => {
+    if (!height) return
     heightsRef.current[id] = height
     const values = Object.values(heightsRef.current)
     if (values.length === 0) return
     const max = Math.max(...values)
     setFrontHeight((prev) => (prev === max ? prev : max))
+  }, [])
+
+  const toggleFlip = useCallback((id) => {
+    setFlippedIds((prev) => {
+      const next = new Set(prev)
+      if (next.has(id)) next.delete(id)
+      else next.add(id)
+      return next
+    })
   }, [])
 
   return (
@@ -74,14 +87,25 @@ export default function ChallengeFlipCards() {
       </p>
 
       <div className="mt-8 grid items-start gap-6 sm:grid-cols-2">
-        {CHALLENGE_CARDS.map((card) => (
-          <FlipCard
-            key={card.id}
-            {...card}
-            uniformFrontHeight={frontHeight}
-            onFrontHeight={reportFrontHeight}
-          />
-        ))}
+        {CHALLENGE_CARDS.map((card) => {
+          const flipped = flippedIds.has(card.id)
+          return (
+            <div
+              key={card.id}
+              className={`min-w-0 transition-[grid-column] duration-500 ease-in-out ${
+                flipped ? 'sm:col-span-2' : 'sm:col-span-1'
+              }`}
+            >
+              <FlipCard
+                {...card}
+                flipped={flipped}
+                onToggle={() => toggleFlip(card.id)}
+                uniformFrontHeight={frontHeight}
+                onFrontHeight={reportFrontHeight}
+              />
+            </div>
+          )
+        })}
       </div>
     </div>
   )
@@ -92,62 +116,77 @@ function FlipCard({
   title,
   summary,
   back,
+  flipped,
+  onToggle,
   uniformFrontHeight,
   onFrontHeight,
 }) {
-  const [flipped, setFlipped] = useState(false)
   const [backHeight, setBackHeight] = useState(null)
+  const outerRef = useRef(null)
   const frontRef = useRef(null)
   const backRef = useRef(null)
 
-  const measure = useCallback(() => {
+  const measureFront = useCallback(() => {
+    const outer = outerRef.current
     const front = frontRef.current
-    if (front) {
-      const previous = front.style.height
-      front.style.height = 'auto'
-      onFrontHeight(id, front.scrollHeight)
-      front.style.height = previous
-    }
-    if (backRef.current) {
-      setBackHeight(backRef.current.scrollHeight)
-    }
-  }, [id, onFrontHeight])
+    if (!outer || !front || flipped) return
+
+    const prevOuter = outer.style.height
+    const prevFront = front.style.height
+    outer.style.height = 'auto'
+    front.style.height = 'auto'
+    onFrontHeight(id, front.scrollHeight)
+    outer.style.height = prevOuter
+    front.style.height = prevFront
+  }, [flipped, id, onFrontHeight])
+
+  const measureBack = useCallback(() => {
+    if (!flipped || !backRef.current) return
+    setBackHeight(backRef.current.scrollHeight)
+  }, [flipped])
 
   useLayoutEffect(() => {
-    measure()
-  }, [measure, title, summary, back])
+    measureFront()
+    measureBack()
+  }, [measureFront, measureBack, title, summary, back])
 
   useEffect(() => {
-    window.addEventListener('resize', measure)
-    return () => window.removeEventListener('resize', measure)
-  }, [measure])
+    const onResize = () => {
+      measureFront()
+      measureBack()
+    }
+    window.addEventListener('resize', onResize)
+    return () => window.removeEventListener('resize', onResize)
+  }, [measureFront, measureBack])
 
-  const height = flipped
-    ? backHeight ?? 'auto'
-    : uniformFrontHeight ?? 'auto'
+  useEffect(() => {
+    if (!flipped) return undefined
+    const timer = window.setTimeout(measureBack, 520)
+    return () => window.clearTimeout(timer)
+  }, [flipped, measureBack])
+
+  const height = flipped ? backHeight ?? 'auto' : uniformFrontHeight ?? 'auto'
 
   return (
     <div
-      className="perspective-card transition-[height] duration-500 ease-in-out"
+      ref={outerRef}
+      className="perspective-card w-full transition-[height] duration-500 ease-in-out"
       style={{ height }}
     >
-      <div className="h-full transition-all duration-500 ease-in-out hover:scale-[1.02] hover:shadow-xl hover:shadow-stone-300/60">
+      <div className="h-full w-full transition-all duration-300 ease-out hover:scale-[1.02] hover:[&_button>div]:shadow-[0_16px_40px_-10px_rgba(15,118,110,0.2),0_0_24px_rgba(45,212,191,0.22)]">
         <button
           type="button"
           aria-pressed={flipped}
-          onClick={() => setFlipped((prev) => !prev)}
+          onClick={onToggle}
           className={`preserve-3d relative h-full w-full cursor-pointer rounded-2xl text-left outline-none transition-transform duration-500 ease-in-out focus-visible:ring-2 focus-visible:ring-teal-500/40 ${
             flipped ? 'rotate-y-180' : ''
           }`}
         >
+          {/* Front: height follows front copy; outer enforces equal height */}
           <div
             ref={frontRef}
-            className="backface-hidden absolute inset-x-0 top-0 flex min-h-full w-full flex-col rounded-2xl border border-slate-900/[0.08] bg-white p-5 shadow-[0_10px_30px_-5px_rgba(0,0,0,0.03),0_0_30px_rgba(51,65,85,0.08)] transition-all duration-300"
-            style={
-              !flipped && uniformFrontHeight
-                ? { height: uniformFrontHeight }
-                : undefined
-            }
+            className={`backface-hidden absolute inset-x-0 top-0 flex w-full flex-col ${cardShellClass}`}
+            style={{ height: flipped ? undefined : height }}
           >
             <div className="mb-3 flex items-center justify-between gap-2">
               <span className="text-[10px] font-semibold uppercase tracking-[0.18em] text-teal-800">
@@ -158,14 +197,15 @@ function FlipCard({
             <h3 className="font-display text-base font-semibold leading-snug text-stone-900">
               {title}
             </h3>
-            <p className="mt-3 flex-1 text-sm leading-relaxed text-stone-600">
+            <p className="mt-3 text-sm leading-relaxed text-stone-600">
               {summary}
             </p>
           </div>
 
+          {/* Back: full-width long card, height from back copy */}
           <div
             ref={backRef}
-            className="backface-hidden rotate-y-180 absolute inset-x-0 top-0 rounded-2xl border border-slate-900/[0.08] bg-white p-5 shadow-[0_10px_30px_-5px_rgba(0,0,0,0.03),0_0_30px_rgba(51,65,85,0.08)] transition-all duration-300"
+            className={`backface-hidden rotate-y-180 absolute inset-x-0 top-0 w-full sm:p-6 ${cardShellClass}`}
           >
             <div className="mb-3 flex items-center justify-between gap-2">
               <span className="text-[10px] font-semibold uppercase tracking-[0.18em] text-teal-800">
@@ -177,7 +217,7 @@ function FlipCard({
               {title}
             </h3>
             {back ? (
-              <p className="mt-3 whitespace-pre-line text-sm leading-relaxed text-stone-600">
+              <p className="mt-3 whitespace-pre-line text-sm leading-relaxed text-stone-600 sm:text-[0.95rem]">
                 {renderWithBold(back)}
               </p>
             ) : (

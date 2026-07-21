@@ -21,7 +21,7 @@ export default function ImageCarousel() {
   return (
     <div className="flex flex-col items-center">
       <div className="relative">
-        <div className="flex h-80 w-80 items-center justify-center overflow-hidden rounded-2xl border border-stone-200 bg-white shadow-lg shadow-stone-200/60 sm:h-96 sm:w-96 md:h-[450px] md:w-[450px]">
+        <div className="soft-card flex h-80 w-80 items-center justify-center overflow-hidden sm:h-96 sm:w-96 md:h-[450px] md:w-[450px]">
           <img
             src={photos[current]}
             alt={t('carousel.photoAlt', { number: current + 1 })}
@@ -33,7 +33,7 @@ export default function ImageCarousel() {
           type="button"
           aria-label={t('carousel.prevPhoto')}
           onClick={() => goTo(current - 1)}
-          className="absolute left-2 top-1/2 -translate-y-1/2 rounded-full border border-stone-200 bg-white/90 p-2 text-stone-600 shadow-md transition-all duration-300 hover:scale-110 hover:border-stone-300 hover:text-stone-900"
+          className="soft-btn absolute left-2 top-1/2 -translate-y-1/2 p-2"
         >
           <ChevronLeft size={20} />
         </button>
@@ -42,7 +42,7 @@ export default function ImageCarousel() {
           type="button"
           aria-label={t('carousel.nextPhoto')}
           onClick={() => goTo(current + 1)}
-          className="absolute right-2 top-1/2 -translate-y-1/2 rounded-full border border-stone-200 bg-white/90 p-2 text-stone-600 shadow-md transition-all duration-300 hover:scale-110 hover:border-stone-300 hover:text-stone-900"
+          className="soft-btn absolute right-2 top-1/2 -translate-y-1/2 p-2"
         >
           <ChevronRight size={20} />
         </button>

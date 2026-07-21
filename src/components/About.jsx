@@ -1,4 +1,6 @@
+import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
+import { ArrowUpRight } from 'lucide-react'
 
 const techStack = ['React', 'Tailwind', 'Docker', 'PyTorch', 'Git']
 
@@ -30,15 +32,25 @@ export default function About() {
               <span
                 key={tech}
                 style={{ animationDelay: `${index * 80}ms` }}
-                className="animate-slide-up rounded-xl border border-stone-200 bg-white px-4 py-2.5 text-sm font-medium text-stone-700 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-teal-300 hover:text-teal-700 hover:shadow-md"
+                className="soft-card animate-slide-up px-4 py-2.5 text-sm font-medium text-slate-700"
               >
                 {tech}
               </span>
             ))}
           </div>
 
-          <div className="mt-8 rounded-2xl border border-stone-200 bg-amber-50/40 p-6">
-            <p className="text-sm leading-relaxed text-stone-600">{t('about.quote')}</p>
+          <div className="soft-card mt-8 p-6">
+            <p className="text-sm leading-relaxed text-slate-600">{t('about.quote')}</p>
+          </div>
+
+          <div className="mt-5 flex justify-end">
+            <Link
+              to="/about"
+              className="soft-btn !bg-teal-50 px-3.5 py-2 text-xs tracking-wide !text-teal-800"
+            >
+              {t('about.viewFullBio')}
+              <ArrowUpRight size={13} strokeWidth={2.25} />
+            </Link>
           </div>
         </div>
       </div>

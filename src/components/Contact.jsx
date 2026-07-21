@@ -55,7 +55,7 @@ export default function Contact() {
       <div className="grid gap-10 lg:grid-cols-[1.2fr_0.8fr]">
         <form
           onSubmit={handleSubmit}
-          className="space-y-5 rounded-2xl border border-stone-200 bg-white p-6 shadow-sm sm:p-8"
+          className="soft-card space-y-5 p-6 sm:p-8"
         >
           <div>
             <label htmlFor="name" className="mb-2 block text-sm text-stone-700">
@@ -111,7 +111,7 @@ export default function Contact() {
           <button
             type="submit"
             disabled={loading}
-            className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-teal-600 to-emerald-600 px-5 py-3 text-sm font-semibold text-white transition-all duration-300 hover:scale-[1.02] hover:shadow-lg hover:shadow-teal-200/60 disabled:cursor-not-allowed disabled:opacity-70 disabled:hover:scale-100 sm:w-auto"
+            className="soft-btn w-full px-5 py-3 text-sm font-semibold disabled:cursor-not-allowed disabled:opacity-70 sm:w-auto"
           >
             <Send size={16} />
             {loading ? t('contact.sending') : t('contact.submit')}
@@ -119,7 +119,7 @@ export default function Contact() {
         </form>
 
         <div className="flex flex-col justify-center gap-6">
-          <div className="rounded-2xl border border-stone-200 bg-white p-6 shadow-sm">
+          <div className="soft-card p-6">
             <h3 className="font-display text-lg font-semibold text-stone-900">
               {t('contact.directEmailTitle')}
             </h3>
@@ -128,7 +128,7 @@ export default function Contact() {
             </p>
             <a
               href="mailto:jodiechu1204@gmail.com"
-              className="mt-6 inline-flex items-center gap-2 rounded-xl border border-teal-200 bg-teal-50 px-5 py-3 text-sm font-medium text-teal-700 transition-all duration-300 hover:-translate-y-0.5 hover:border-teal-300 hover:bg-teal-100 hover:shadow-md"
+              className="soft-btn mt-6 px-5 py-3 text-sm"
             >
               <Mail size={18} />
               jodiechu1204@gmail.com

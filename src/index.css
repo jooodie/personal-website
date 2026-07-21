@@ -37,4 +37,16 @@
   .rotate-y-180 {
     transform: rotateY(180deg);
   }
+
+  .soft-card {
+    @apply rounded-2xl border border-slate-900/[0.08] bg-white shadow-[0_10px_30px_-5px_rgba(0,0,0,0.03),0_0_30px_rgba(51,65,85,0.08)] transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_16px_40px_-10px_rgba(15,118,110,0.2),0_0_24px_rgba(45,212,191,0.22)];
+  }
+
+  .soft-card-static {
+    @apply rounded-2xl border border-slate-900/[0.08] bg-white shadow-[0_10px_30px_-5px_rgba(0,0,0,0.03),0_0_30px_rgba(51,65,85,0.08)];
+  }
+
+  .soft-btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border border-slate-900/[0.08] bg-white font-medium text-slate-700 shadow-[0_10px_30px_-5px_rgba(0,0,0,0.03),0_0_30px_rgba(51,65,85,0.08)] transition-all duration-300 hover:scale-105 hover:shadow-[0_14px_32px_-8px_rgba(15,118,110,0.2),0_0_22px_rgba(45,212,191,0.22)];
+  }
 }

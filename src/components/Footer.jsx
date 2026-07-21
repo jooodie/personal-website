@@ -33,7 +33,7 @@ export default function Footer() {
               target={href.startsWith('mailto:') ? undefined : '_blank'}
               rel={href.startsWith('mailto:') ? undefined : 'noreferrer'}
               aria-label={label}
-              className="group inline-flex items-center gap-2 rounded-full border border-stone-200 bg-stone-50 px-5 py-2.5 text-sm font-medium text-stone-700 transition-all duration-300 hover:scale-105 hover:border-teal-300 hover:bg-teal-50 hover:text-teal-700 hover:shadow-md"
+              className="soft-btn group px-5 py-2.5 text-sm"
             >
               <Icon size={18} className="transition-transform duration-300 group-hover:scale-110" />
               <span>{label}</span>

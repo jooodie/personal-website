@@ -163,7 +163,7 @@ export default function TechnicalDesignSteps() {
               </span>
             </div>
 
-            <div className="min-w-0 flex-1 rounded-2xl border border-slate-900/[0.08] bg-white p-4 shadow-[0_10px_30px_-5px_rgba(0,0,0,0.03),0_0_30px_rgba(51,65,85,0.08)] sm:p-6">
+            <div className="soft-card min-w-0 flex-1 p-4 sm:p-6">
               <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-teal-800 sm:text-xs">
                 {step.label}
               </p>
